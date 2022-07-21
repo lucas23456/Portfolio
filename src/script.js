@@ -1,13 +1,19 @@
 import './styles/style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import gsap from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+
+const light = new THREE.AmbientLight( 0x404040 )
+scene.add( light );
 
 // TextureLoader
 // const loader = new THREE.TextureLoader()
@@ -46,7 +52,46 @@ const sphere = new THREE.Points(geometry,material)
 const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
 scene.add(sphere, particlesMesh)
 
-// Lights
+/******************************************************* Egyptian King ****************************************************************/ 
+
+const loader = new GLTFLoader();
+
+loader.load( 'https://cdn.glitch.global/827c2528-a6de-4dd0-9636-5c5382cd894a/king.glb?v=1658069969168', function ( gltf ) {
+
+	scene.add(gltf.scene);  
+
+    gltf.scene.rotation.y = -3.9;
+
+
+    gltf.scene.position.y = -8.5;
+    gltf.scene.position.z = -3;
+    gltf.scene.position.x = -2;
+
+    // Animate model..
+    gsap.to(gltf.scene.position,{
+        y:-5,
+        duration: 0.1,
+        scrollTrigger: {
+          trigger: sections[2],
+        },
+    }) 
+
+    gsap.from(gltf.scene.rotation, {
+      x: 1,
+      duration: 0.1,
+      scrollTrigger: {
+        trigger: sections[2],
+      },
+    })
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
+
+// ******************************************************************Lights*****************************************************************
 
 const pointLight = new THREE.PointLight(0xffffff, 0.1)
 pointLight.position.x = 2
@@ -88,34 +133,42 @@ camera.position.z = 2
 scene.add(camera)
 
 // Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
+ //const controls = new OrbitControls(camera, canvas)
+ //controls.enableDamping = true
 
-// Animate Camera 
-    
-const tl = gsap.timeline();
+//*******************************************************Animate camera*************************************************************/
 
+const sections = document.querySelectorAll('.section')
 
-window.scroll(function() { 
+gsap.registerPlugin(ScrollTrigger)
+ScrollTrigger.defaults({
+  scrub: 3,
+  ease: 'none',
+})
 
-    if(window.scrollTop() > $("#about").offset().top) {
-           console.log("yes")
-    }
+gsap.from('h1', {
+  yPercent: 100,
+  autoAlpha: 0,
+  ease: 'back',
+  delay: 0.3,
+})
 
-});
+gsap.to(camera.rotation, {
+    x: 0,
+    duration: 0.1,
+    scrollTrigger: {
+      trigger: sections[1],
+    },
+  })
 
-window.addEventListener("scroll", function(){
-
-    tl.to(camera.position, {
-        z: 6,
-        duration: 1
-    })
-
-    tl.to(camera.position, {
-        y: -6,
-        duration: 1
-    })
-});
+gsap.to(camera.position,{
+    z:2,
+    y:-4,
+    duration: 0.1,
+    scrollTrigger: {
+      trigger: sections[2],
+    },
+  }) 
 
 /**
  * Renderer
