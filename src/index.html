@@ -4,8 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ThreeJS Starter</title>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta http-equiv='Referrer-Policy' content='no-referrer-when-downgrade'>
 </head>
 <body>
+    <div class="container">
+        <div class="content">
+            <h1>Лукас<br>Абдел-Малак</h1>
+            <br>
+            <p>Креативный фулстек программист</p>
+        </div>
+    </div>
+    <div class="menu">
+        <a href="#">ГЛАВНАЯ</a>
+        <a href="#about">Навыки</a>
+        <a href="#">МОИ РАБОТЫ</a>
+        <a href="#">КОНТАКТЫ</a>
+    </div>
+    <br>
+    <div class="block__txt">
+        <section class="#about">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi sequi animi nemo enim recusandae ab dolorem voluptatibus et doloribus temporibus, ratione suscipit reprehenderit, odio veritatis. Ipsam nulla inventore optio minima.</p>
+        </section>
+    </div>
     <canvas class="webgl"></canvas>
+
+    <div class="cursor rounded"></div>
+
+
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const cursorRounded = document.querySelector('.rounded');
+    
+    
+    const moveCursor = (e)=> {
+      const mouseY = e.clientY;
+      const mouseX = e.clientX;
+       
+      cursorRounded.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+         
+    }
+    
+    window.addEventListener('mousemove', moveCursor)
+
+    $(window).scroll(function() { 
+
+        if ($(window).scrollTop() > $("#about").offset()) {
+            console.log("hello")
+        }
+  
+  });
+
+</script>
 </html>

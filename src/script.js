@@ -1,10 +1,7 @@
-import './style.css'
+import './styles/style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import * as dat from 'dat.gui'
-
-// Debug
-const gui = new dat.GUI()
+import gsap from 'gsap'
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -12,17 +9,42 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+// TextureLoader
+// const loader = new THREE.TextureLoader()
+// const cross = loader.load('../style.css')
+
 // Objects
 const geometry = new THREE.TorusGeometry( .7, .2, 16, 100 );
 
+const particlesGeometry = new THREE.BufferGeometry;
+const particlesCnt = 8000;
+
+const posArray = new Float32Array(particlesCnt * 3);
+
+for(let i = 0; i < particlesCnt * 3; i++){
+    // posArray[i] = Math.random()
+    // posArray[i] = Math.random() - 0.5
+    posArray[i] = (Math.random() - 0.5) * 20
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 // Materials
 
-const material = new THREE.MeshBasicMaterial()
-material.color = new THREE.Color(0xff0000)
+const material = new THREE.PointsMaterial({
+    size: 0.005
+})
+
+const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.02,
+    // map: cross,
+    // transparent: true
+    blending: THREE.AdditiveBlending
+})
 
 // Mesh
-const sphere = new THREE.Mesh(geometry,material)
-scene.add(sphere)
+const sphere = new THREE.Points(geometry,material)
+const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(sphere, particlesMesh)
 
 // Lights
 
@@ -69,14 +91,54 @@ scene.add(camera)
 // const controls = new OrbitControls(camera, canvas)
 // controls.enableDamping = true
 
+// Animate Camera 
+    
+const tl = gsap.timeline();
+
+
+window.scroll(function() { 
+
+    if(window.scrollTop() > $("#about").offset().top) {
+           console.log("yes")
+    }
+
+});
+
+window.addEventListener("scroll", function(){
+
+    tl.to(camera.position, {
+        z: 6,
+        duration: 1
+    })
+
+    tl.to(camera.position, {
+        y: -6,
+        duration: 1
+    })
+});
+
 /**
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
+
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.setClearColor(new THREE.Color('#21282a'), 1)
+
+//Mouse 
+
+document.addEventListener('mousemove', animateParticles)
+
+let mouseX = 0
+let mouseY = 0
+
+function animateParticles(event){
+    mouseY = event.clientY
+    mouseX = event.clientX 
+}
 
 /**
  * Animate
@@ -91,6 +153,12 @@ const tick = () =>
 
     // Update objects
     sphere.rotation.y = .5 * elapsedTime
+    particlesMesh.rotation.y = -.1 * elapsedTime
+    
+    if (mouseX > 0){
+        particlesMesh.rotation.y = -mouseX * (elapsedTime * 0.00008) 
+        particlesMesh.rotation.x = -mouseY * (elapsedTime * 0.00008) 
+    }
 
     // Update Orbital Controls
     // controls.update()

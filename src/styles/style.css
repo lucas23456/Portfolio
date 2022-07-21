@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  cursor: none;
+  height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: white;
+  padding-bottom: 40%;
+  overflow-y: scroll;
+  -ms-scroll-snap-type: y mandatory;
+      scroll-snap-type: y mandatory;
+}
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+.container {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  scroll-snap-align: start;
+}
+
+.menu {
+  background-color: #2d3334;
+  position: absolute;
+  z-index: 1;
+  height: 100vh;
+  display: grid;
+  place-content: left;
+  width: 90px;
+  position: fixed;
+}
+
+.menu a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  color: white;
+  text-decoration: none;
+  transform: rotate(270deg);
+  text-transform: uppercase;
+  font-size: 20px;
+  transition: 0.5s;
+}
+
+.menu a:hover {
+  color: #838787;
+  transition: 0.5s;
+}
+
+.block__txt {
+  position: absolute;
+  z-index: 1;
+  padding: 1rem;
+  background: rgb(81, 81, 81);
+  font-size: 1.25rem;
+  margin: 50%;
+  border-radius: 10px;
+  scroll-snap-align: start;
+}
+
+.content {
+  width: 100%;
+  padding-top: 3em;
+  position: relative;
+}
+
+.content:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid white;
+  transform: scaleX(1);
+}
+
+h1 {
+  font-size: 4rem;
+  width: 50vw;
+  line-height: 97%;
+}
+
+p {
+  font-size: 1.3rem;
+  width: 40vw;
+}
+
+.rounded {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}/*# sourceMappingURL=style.css.map */
