@@ -10,8 +10,6 @@ body {
   color: white;
   padding-bottom: 45%;
   overflow-y: scroll;
-  -ms-scroll-snap-type: y mandatory;
-      scroll-snap-type: y mandatory;
   overflow-x: hidden;
 }
 
@@ -71,7 +69,6 @@ body {
   height: 100vh;
   display: grid;
   place-content: left;
-  width: 90px;
   position: fixed;
 }
 
@@ -93,7 +90,7 @@ body {
   transition: 0.5s;
 }
 
-.block__txt {
+.about__txt {
   position: absolute;
   z-index: 1;
   padding: 1rem;
@@ -106,7 +103,29 @@ body {
   width: 600px;
 }
 
-.about__txt {
+.block__txt {
+  font-size: 30px;
+  text-align: center;
+}
+
+.works__txt {
+  position: absolute;
+  z-index: 1;
+  padding: 1rem;
+  background: #364043;
+  font-size: 1.25rem;
+  margin-left: 10%;
+  margin-top: 115%;
+  scroll-snap-align: start;
+  border-radius: 10px;
+  height: 300px;
+}
+
+.works {
+  margin: 0 auto;
+}
+
+.block__txt {
   font-size: 30px;
   text-align: center;
 }
@@ -137,6 +156,7 @@ p {
   cursor: pointer;
   position: relative;
   border-radius: 10px;
+  z-index: 0;
 }
 
 .glow-on-hover:before {

@@ -68,13 +68,6 @@ loader.load( 'https://cdn.glitch.global/827c2528-a6de-4dd0-9636-5c5382cd894a/kin
     gltf.scene.position.x = -2;
 
     // Animate model..
-    gsap.to(gltf.scene.position,{
-        y:-5,
-        duration: 0.1,
-        scrollTrigger: {
-          trigger: sections[2],
-        },
-    }) 
 
     gsap.from(gltf.scene.rotation, {
       x: 1,
@@ -83,6 +76,15 @@ loader.load( 'https://cdn.glitch.global/827c2528-a6de-4dd0-9636-5c5382cd894a/kin
         trigger: sections[2],
       },
     })
+
+    gsap.to(gltf.scene.position,{
+        y:-5,
+        duration: 0.1,
+        scrollTrigger: {
+          trigger: sections[2],
+        },
+    }) 
+
 
 }, undefined, function ( error ) {
 
@@ -169,6 +171,8 @@ gsap.to(camera.position,{
       trigger: sections[2],
     },
   }) 
+
+//********************************************************************OH SHIT NIGGA ***************************************************/
 
 /**
  * Renderer

@@ -20,7 +20,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/index.html'),
-            minify: true
+            minify: true,
         }),
         new MiniCSSExtractPlugin()
     ],
