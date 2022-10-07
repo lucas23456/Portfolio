@@ -65,7 +65,7 @@ loader.load( 'https://cdn.glitch.global/827c2528-a6de-4dd0-9636-5c5382cd894a/kin
 
     gltf.scene.rotation.y = -3.9;
 
-    gltf.scene.position.y = -8;
+    gltf.scene.position.y = -19;
     gltf.scene.position.z = -3;
     gltf.scene.position.x = -2;
 
@@ -73,15 +73,13 @@ loader.load( 'https://cdn.glitch.global/827c2528-a6de-4dd0-9636-5c5382cd894a/kin
 
     gsap.from(gltf.scene.rotation, {
       x: 0.5,
-      duration: 0.1,
       scrollTrigger: {
         trigger: sections[2],
       },
     })
 
     gsap.to(gltf.scene.position,{
-        y:-2,
-        duration: 0.1,
+        y:-0.7,
         scrollTrigger: {
           trigger: sections[2],
         },
@@ -93,6 +91,7 @@ loader.load( 'https://cdn.glitch.global/827c2528-a6de-4dd0-9636-5c5382cd894a/kin
 	console.error( error );
 
 } );
+
 
 
 // ******************************************************************Lights*****************************************************************
@@ -171,6 +170,15 @@ gsap.to(camera.position,{
     duration: 0.1,
     scrollTrigger: {
       trigger: sections[2],
+    },
+  }) 
+
+gsap.to(camera.position,{
+    z:2,
+    y:-8,
+    duration: 0.1,
+    scrollTrigger: {
+      trigger: sections[4],
     },
   }) 
 
