@@ -5,6 +5,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 
+//Texture Loader
+const TextureLoader = new THREE.TextureLoader()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -34,6 +36,7 @@ for(let i = 0; i < particlesCnt * 3; i++){
 }
 
 particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
 // Materials
 
 const material = new THREE.PointsMaterial({
@@ -62,15 +65,14 @@ loader.load( 'https://cdn.glitch.global/827c2528-a6de-4dd0-9636-5c5382cd894a/kin
 
     gltf.scene.rotation.y = -3.9;
 
-
-    gltf.scene.position.y = -8.5;
+    gltf.scene.position.y = -8;
     gltf.scene.position.z = -3;
     gltf.scene.position.x = -2;
 
     // Animate model..
 
     gsap.from(gltf.scene.rotation, {
-      x: 1,
+      x: 0.5,
       duration: 0.1,
       scrollTrigger: {
         trigger: sections[2],
@@ -78,13 +80,13 @@ loader.load( 'https://cdn.glitch.global/827c2528-a6de-4dd0-9636-5c5382cd894a/kin
     })
 
     gsap.to(gltf.scene.position,{
-        y:-5,
+        y:-2,
         duration: 0.1,
         scrollTrigger: {
           trigger: sections[2],
         },
-    }) 
-
+    });
+    
 
 }, undefined, function ( error ) {
 
@@ -165,7 +167,7 @@ gsap.to(camera.rotation, {
 
 gsap.to(camera.position,{
     z:2,
-    y:-4,
+    y:-4.5,
     duration: 0.1,
     scrollTrigger: {
       trigger: sections[2],
@@ -227,4 +229,5 @@ const tick = () =>
     window.requestAnimationFrame(tick)
 }
 
-tick()
+tick();
+
